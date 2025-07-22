@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Top Scorers' IELTS & Speaking Academy</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Glass effect */
+      .glass {
+        background: rgba(255 255 255 / 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        border: 1px solid rgba(255 255 255 / 0.3);
+        box-shadow: 0 0 10px rgba(255 255 255 / 0.15);
+        transition: box-shadow 0.3s ease;
+      }
+      .glass:hover {
+        box-shadow: 0 0 20px rgba(255 255 255 / 0.3);
+      }
+      /* Glow button */
+      .glow-button {
+        box-shadow: 0 0 8px #3b82f6;
+        transition: box-shadow 0.3s ease;
+      }
+      .glow-button:hover {
+        box-shadow: 0 0 16px #3b82f6;
+      }
+      /* Reviews carousel */
+      .carousel {
+        overflow: hidden;
+        position: relative;
+      }
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      .carousel-item {
+        min-width: 100%;
+        box-sizing: border-box;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-r from-blue-900 via-purple-900 to-black text-white font-sans"
+  >
+    <!-- Navbar -->
+    <nav
+      class="bg-black bg-opacity-70 fixed w-full z-50 backdrop-blur-md shadow-md"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16"
+      >
+        <div class="text-2xl font-bold select-none">LOGO HERE</div>
+        <!-- Put your logo here -->
+        <button
+          id="menu-toggle"
+          class="md:hidden focus:outline-none text-white"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+        <ul
+          id="nav-menu"
+          class="hidden md:flex space-x-8 items-center text-white"
+        >
+          <li>
+            <a href="#about" class="hover:text-yellow-400 transition">About</a>
+          </li>
+          <li>
+            <a href="#courses" class="hover:text-yellow-400 transition"
+              >Courses</a
+            >
+          </li>
+          <li>
+            <a href="#schedule" class="hover:text-yellow-400 transition"
+              >Schedule</a
+            >
+          </li>
+          <li>
+            <a href="#reviews" class="hover:text-yellow-400 transition"
+              >Reviews</a
+            >
+          </li>
+          <li>
+            <a href="#gallery" class="hover:text-yellow-400 transition"
+              >Gallery</a
+            >
+          </li>
+          <li>
+            <a href="#contact" class="hover:text-yellow-400 transition"
+              >Contact</a
+            >
+          </li>
+          <li>
+            <a href="#register" class="hover:text-yellow-400 transition"
+              >Register</a
+            >
+          </li>
+          <li>
+            <button
+              id="lang-toggle"
+              class="bg-green-500 text-black px-3 py-1 rounded font-semibold hover:bg-green-400 transition"
+            >
+              বাংলা
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="md:hidden bg-black bg-opacity-90 backdrop-blur-md px-4 py-4 space-y-4 hidden text-center text-white fixed w-full top-16 z-40"
+    >
+      <a href="#about" class="block py-2 hover:text-yellow-400">About</a>
+      <a href="#courses" class="block py-2 hover:text-yellow-400">Courses</a>
+      <a href="#schedule" class="block py-2 hover:text-yellow-400">Schedule</a>
+      <a href="#reviews" class="block py-2 hover:text-yellow-400">Reviews</a>
+      <a href="#gallery" class="block py-2 hover:text-yellow-400">Gallery</a>
+      <a href="#contact" class="block py-2 hover:text-yellow-400">Contact</a>
+      <a href="#register" class="block py-2 hover:text-yellow-400">Register</a>
+      <button
+        id="mobile-lang-toggle"
+        class="bg-green-500 text-black px-3 py-1 rounded font-semibold hover:bg-green-400 transition w-full"
+      >
+        বাংলা
+      </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="pt-24 text-center py-20 px-6">
+      <h1
+        class="text-5xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 animate-pulse"
+        data-lang-en
+      >
+        Top Scorers' IELTS & Speaking Academy
+      </h1>
+      <h1
+        class="hidden text-5xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 animate-pulse"
+        data-lang-bn
+      >
+        টপ স্কোরার্স IELTS ও স্পিকিং একাডেমি
+      </h1>
+      <p class="mt-6 text-xl max-w-3xl mx-auto" data-lang-en>
+        Achieve your dream band with expert mentors and personalized strategies
+      </p>
+      <p class="hidden mt-6 text-xl max-w-3xl mx-auto" data-lang-bn>
+        দক্ষ শিক্ষকদের সঙ্গে আপনার স্বপ্নের ব্যান্ড স্কোর অর্জন করুন
+      </p>
+      <a
+        href="#register"
+        class="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg glow-button transition"
+        data-lang-en
+        >Register Now</a
+      >
+      <a
+        href="#register"
+        class="hidden mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg glow-button transition"
+        data-lang-bn
+        >রেজিস্টার করুন</a
+      >
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="max-w-5xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
+        Meet Our Teachers
+      </h2>
+      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
+        আমাদের শিক্ষকবৃন্দ
+      </h2>
+      <div class="grid md:grid-cols-2 gap-10">
+        <div
+          class="glass p-6 shadow-lg hover:shadow-xl transition cursor-default rounded-lg text-center"
+        >
+          <h3 class="text-2xl font-semibold mb-2">Afnan Sohel</h3>
+          <p class="text-yellow-300 font-semibold" data-lang-en>
+            IELTS Band Score: 8.5
+          </p>
+          <p class="hidden text-yellow-300 font-semibold" data-lang-bn>
+            IELTS ব্যান্ড স্কোর: ৮.৫
+          </p>
+        </div>
+        <div
+          class="glass p-6 shadow-lg hover:shadow-xl transition cursor-default rounded-lg text-center"
+        >
+          <h3 class="text-2xl font-semibold mb-2">Sayeed Islam</h3>
+          <p class="text-yellow-300 font-semibold" data-lang-en>
+            IELTS Band Score: 6.5
+          </p>
+          <p class="hidden text-yellow-300 font-semibold" data-lang-bn>
+            IELTS ব্যান্ড স্কোর: ৬.৫
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="max-w-5xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
+        Our Courses & Pricing
+      </h2>
+      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
+        আমাদের কোর্স ও মূল্য
+      </h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div
+          class="glass p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center"
+        >
+          <h3 class="text-xl font-semibold mb-2" data-lang-en>
+            Basic Speaking
+          </h3>
+          <h3 class="hidden text-xl font-semibold mb-2" data-lang-bn>
+            বেসিক স্পিকিং
+          </h3>
+          <p class="mb-4" data-lang-en>Duration: 1 Month</p>
+          <p class="hidden mb-4" data-lang-bn>সময়কাল: ১ মাস</p>
+          <p class="text-yellow-400 font-bold text-2xl">৳3,000</p>
+        </div>
+        <div
+          class="glass p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center"
+        >
+          <h3 class="text-xl font-semibold mb-2" data-lang-en>IELTS Crash</h3>
+          <h3 class="hidden text-xl font-semibold mb-2" data-lang-bn>
+            আইইএলটিএস ক্র্যাশ
+          </h3>
+          <p class="mb-4" data-lang-en>Duration: 1.5 Months</p>
+          <p class="hidden mb-4" data-lang-bn>সময়কাল: ১.৫ মাস</p>
+          <p class="text-yellow-400 font-bold text-2xl">৳6,500</p>
+        </div>
+        <div
+          class="glass p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center"
+        >
+          <h3 class="text-xl font-semibold mb-2" data-lang-en>
+            Full IELTS Package
+          </h3>
+          <h3 class="hidden text-xl font-semibold mb-2" data-lang-bn>
+            ফুল আইইএলটিএস প্যাকেজ
+          </h3>
+          <p class="mb-4" data-lang-en>Duration: 3 Months</p>
+          <p class="hidden mb-4" data-lang-bn>সময়কাল: ৩ মাস</p>
+          <p class="text-yellow-400 font-bold text-2xl">৳12,000</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Schedule Section -->
+    <section id="schedule" class="max-w-5xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
+        Class Schedule
+      </h2>
+      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
+        ক্লাস সূচি
+      </h2>
+      <div class="overflow-x-auto">
+        <table
+          class="min-w-full text-center border border-white text-white rounded-lg overflow-hidden"
+        >
+          <thead>
+            <tr class="bg-purple-900">
+              <th class="border px-4 py-2">Day</th>
+              <th class="border px-4 py-2">Time</th>
+              <th class="border px-4 py-2" data-lang-en>Course</th>
+              <th class="border px-4 py-2 hidden" data-lang-bn>কোর্স</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white bg-opacity-10">
+              <td class="border px-4 py-2">Sunday</td>
+              <td class="border px-4 py-2">4 PM - 6 PM</td>
+              <td class="border px-4 py-2" data-lang-en>Basic Speaking</td>
+              <td class="border px-4 py-2 hidden" data-lang-bn>
+                বেসিক স্পিকিং
+              </td>
+            </tr>
+            <tr class="bg-white bg-opacity-5">
+              <td class="border px-4 py-2">Tuesday</td>
+              <td class="border px-4 py-2">4 PM - 6 PM</td>
+              <td class="border px-4 py-2" data-lang-en>IELTS Crash</td>
+              <td class="border px-4 py-2 hidden" data-lang-bn>
+                আইইএলটিএস ক্র্যাশ
+              </td>
+            </tr>
+            <tr class="bg-white bg-opacity-10">
+              <td class="border px-4 py-2">Friday</td>
+              <td class="border px-4 py-2">10 AM - 12 PM</td>
+              <td class="border px-4 py-2" data-lang-en>Full IELTS</td>
+              <td class="border px-4 py-2 hidden" data-lang-bn>
+                ফুল আইইএলটিএস
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="max-w-4xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
+        Student Reviews
+      </h2>
+      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
+        শিক্ষার্থীদের মতামত
+      </h2>
+      <div class="carousel relative">
+        <div
+          class="carousel-track flex transition-transform duration-500"
+          style="transform: translateX(0%)"
+          id="carousel-track"
+        >
+          <div class="carousel-item glass rounded-lg shadow-lg p-6 mx-4">
+            <p class="italic">
+              “Afnan Sir’s teaching method helped me achieve an 8.0 band! Highly
+              recommended.”
+            </p>
+            <p class="mt-4 font-semibold">— Rahim, Dhaka</p>
+          </div>
+
+          <div class="carousel-item glass rounded-lg shadow-lg p-6 mx-4">
+            <p class="italic">
+              “The speaking classes with Sayeed Sir improved my confidence
+              dramatically.”
+            </p>
+            <p class="mt-4 font-semibold">— Shathi, Chattogram</p>
+          </div>
+
+          <div class="carousel-item glass rounded-lg shadow-lg p-6 mx-4">
+            <p class="italic">
+              “Great environment and excellent support from the whole team.”
+            </p>
+            <p class="mt-4 font-semibold">— Jamil, Sylhet</p>
+          </div>
+        </div>
+        <button
+          id="prevBtn"
+          class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black rounded-full p-2 hover:bg-yellow-300 shadow-lg transition"
+        >
+          &lt;
+        </button>
+        <button
+          id="nextBtn"
+          class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black rounded-full p-2 hover:bg-yellow-300 shadow-lg transition"
+        >
+          &gt;
+        </button>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="max-w-6xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
+        Photo Gallery
+      </h2>
+      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
+        ছবি গ্যালারি
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <img
+          src="image/banner.jpg"
+          alt="Classroom"
+          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
+        />
+        <img
+          src="https://source.unsplash.com/400x300/?students"
+          alt="Students"
+          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
+        />
+        <img
+          src="https://source.unsplash.com/400x300/?teacher"
+          alt="Teacher"
+          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
+        />
+        <img
+          src="https://source.unsplash.com/400x300/?education"
+          alt="Education"
+          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
+        />
+        <img
+          src="https://source.unsplash.com/400x300/?study"
+          alt="Study"
+          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
+        />
+        <img
+          src="https://source.unsplash.com/400x300/?library"
+          alt="Library"
+          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
+        />
+      </div>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section id="register" class="max-w-3xl mx-auto px-6 py-16">
+      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
+        Register for a Course
+      </h2>
+      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
+        কোর্সে রেজিস্ট্রেশন করুন
+      </h2>
+      <form
+        id="registration-form"
+        class="glass p-8 rounded-lg shadow-lg space-y-6 max-w-xl mx-auto"
+        onsubmit="event.preventDefault(); alertSubmission();"
+      >
+        <input
+          type="text"
+          id="name-en"
+          placeholder="Full Name"
+          required
+          class="w-full p-3 rounded border border-gray-300 text-black"
+          data-lang-en
+        />
+        <input
+          type="text"
+          id="name-bn"
+          placeholder="পূর্ণ নাম"
+          required
+          class="w-full p-3 rounded border border-gray-300 text-black hidden"
+          data-lang-bn
+        />
+
+        <input
+          type="email"
+          id="email-en"
+          placeholder="Email Address"
+          required
+          class="w-full p-3 rounded border border-gray-300 text-black"
+          data-lang-en
+        />
+        <input
+          type="email"
+          id="email-bn"
+          placeholder="ইমেইল ঠিকানা"
+          required
+          class="w-full p-3 rounded border border-gray-300 text-black hidden"
+          data-lang-bn
+        />
+
+        <input
+          type="tel"
+          id="phone-en"
+          placeholder="Phone Number"
+          required
+          class="w-full p-3 rounded border border-gray-300 text-black"
+          data-lang-en
+        />
+        <input
+          type="tel"
+          id="phone-bn"
+          placeholder="ফোন নম্বর"
+          required
+          class="w-full p-3 rounded border border-gray-300 text-black hidden"
+          data-lang-bn
+        />
+
+        <select
+          id="course-en"
+          required
+          class="w-full p-3 rounded border border-gray-300 text-black"
+          data-lang-en
+        >
+          <option value="" disabled selected>Select Course</option>
+          <option value="Basic Speaking">Basic Speaking</option>
+          <option value="IELTS Crash">IELTS Crash</option>
+          <option value="Full IELTS Package">Full IELTS Package</option>
+        </select>
+        <select
+          id="course-bn"
+          required
+          class="w-full p-3 rounded border border-gray-300 text-black hidden"
+          data-lang-bn
+        >
+          <option value="" disabled selected>কোর্স নির্বাচন করুন</option>
+          <option value="Basic Speaking">বেসিক স্পিকিং</option>
+          <option value="IELTS Crash">আইইএলটিএস ক্র্যাশ</option>
+          <option value="Full IELTS Package">ফুল আইইএলটিএস প্যাকেজ</option>
+        </select>
+
+        <button
+          type="submit"
+          class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded glow-button transition"
+          data-lang-en
+        >
+          Submit
+        </button>
+        <button
+          type="submit"
+          class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded glow-button transition hidden"
+          data-lang-bn
+        >
+          জমা দিন
+        </button>
+      </form>
+    </section>
+
+    <!-- Contact Section -->
+    <section
+      id="contact"
+      class="max-w-5xl mx-auto px-6 py-16 text-center space-y-4"
+    >
+      <h2 class="text-4xl font-bold mb-10" data-lang-en>Contact Us</h2>
+      <h2 class="hidden text-4xl font-bold mb-10" data-lang-bn>যোগাযোগ করুন</h2>
+      <p>📍 54-58, Zila parisad market (old), Nawabganj., Dhaka, Bangladesh</p>
+      <p>
+        📧
+        <a
+          href="mailto:topscorersieltsacademy@gmail.com"
+          class="underline hover:text-yellow-400"
+          >topscorersieltsacademy@gmail.com</a
+        >
+      </p>
+      <p>
+        📞
+        <a
+          href="https://wa.me/+88001732066129"
+          target="_blank"
+          class="text-green-400 underline hover:text-green-600 font-semibold"
+          >WhatsApp</a
+        >
+      </p>
+      <p>
+        🔗
+        <a
+          href="https://www.facebook.com/share/16f2MjDQy5/?mibextid=wwXIfr"
+          target="_blank"
+          class="text-blue-400 underline hover:text-blue-600 font-semibold"
+          >Facebook Page</a
+        >
+      </p>
+      <div class="mt-8 rounded-lg overflow-hidden shadow-lg">
+        <iframe
+          src="https://www.google.com/maps?q=54-58,+Zila+parisad+market+(old),+Nawabganj.,+Dhaka,+Bangladesh&output=embed"
+          width="100%"
+          height="300"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-black bg-opacity-80 text-center py-6 text-gray-400 select-none"
+    >
+      &copy; 2025 Top Scorers' IELTS & Speaking Academy. All rights reserved.
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a
+      href="https://wa.me/+88001732066129"
+      target="_blank"
+      class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg flex items-center justify-center transition"
+      aria-label="WhatsApp Contact"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-7 w-7"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M20.52 3.48a11.07 11.07 0 0 0-15.66 0 11.15 11.15 0 0 0-3.25 7.88c0 2.19.61 4.32 1.75 6.21L2 22l4.62-1.34a10.96 10.96 0 0 0 6.31 2.04h.01a11.1 11.1 0 0 0 7.88-3.25 11.07 11.07 0 0 0 0-15.66zm-4.11 11.73c-.23.63-1.3 1.22-1.86 1.3-.47.07-1.04.1-1.85-.24-1.27-.52-2.08-1.84-2.33-2.11-.25-.26-2.02-2.51-2.02-4.84 0-2.33 1.23-3.47 1.67-3.93.44-.45 1-.57 1.32-.57.3 0 .56 0 .8.02.25.03.37.03.54.02.18-.02.46-.07.7.53.24.6.82 2.07.89 2.22.06.15.1.33.04.54-.06.2-.09.33-.19.53-.1.2-.22.4-.33.54-.11.14-.23.3-.1.57.12.26.54.9 1.16 1.47.81.79 1.42 1.18 1.67 1.31.25.12.39.1.53-.06.14-.15.59-.69.74-.93.15-.24.3-.2.52-.12.23.07 1.44.68 1.69.8.25.12.41.18.47.3.06.12.06.68-.17 1.31z"
+        />
+      </svg>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+      // Mobile menu toggle
+      const menuToggle = document.getElementById("menu-toggle");
+      const navMenu = document.getElementById("nav-menu");
+      const mobileMenu = document.getElementById("mobile-menu");
+      menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Language toggle
+      const langToggle = document.getElementById("lang-toggle");
+      const mobileLangToggle = document.getElementById("mobile-lang-toggle");
+      function toggleLanguage() {
+        document
+          .querySelectorAll("[data-lang-en]")
+          .forEach((el) => el.classList.toggle("hidden"));
+        document
+          .querySelectorAll("[data-lang-bn]")
+          .forEach((el) => el.classList.toggle("hidden"));
+        if (langToggle.innerText === "বাংলা") {
+          langToggle.innerText = "English";
+          mobileLangToggle.innerText = "English";
+        } else {
+          langToggle.innerText = "বাংলা";
+          mobileLangToggle.innerText = "বাংলা";
+        }
+        mobileMenu.classList.add("hidden");
+      }
+      langToggle.addEventListener("click", toggleLanguage);
+      mobileLangToggle.addEventListener("click", toggleLanguage);
+
+      // Reviews Carousel
+      const track = document.getElementById("carousel-track");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const items = track.children;
+      let index = 0;
+
+      function updateCarousel() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+      }
+      prevBtn.addEventListener("click", () => {
+        index = index === 0 ? items.length - 1 : index - 1;
+        updateCarousel();
+      });
+      nextBtn.addEventListener("click", () => {
+        index = index === items.length - 1 ? 0 : index + 1;
+        updateCarousel();
+      });
+
+      // Form submission alert (no backend)
+      function alertSubmission() {
+        if (confirm("Form submitted! We will contact you soon.")) {
+          document.getElementById("registration-form").reset();
+        }
+      }
+    </script>
+  </body>
+</html>
