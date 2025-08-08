@@ -1,653 +1,1124 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script
-      src="https://kit.fontawesome.com/050fdada3b.js"
-      crossorigin="anonymous"
-    ></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Top Scorers' IELTS & Speaking Academy</title>
+    <meta
+      name="description"
+      content="Top Scorers' IELTS & Speaking Academy — expert mentors, personalized strategies, modern courses."
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <script
+      src="https://kit.fontawesome.com/050fdada3b.js"
+      crossorigin="anonymous"
+    ></script>
+
     <style>
-      /* Glass effect */
+      /* --- Animated gradient background (subtle, professional) --- */
+      :root {
+        --bg1: #071028;
+        --bg2: #0f172a;
+        --accent1: #7c3aed;
+        --accent2: #06b6d4;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial;
+        color: var(--fg, #fff);
+        background: radial-gradient(
+            1200px 600px at 10% 10%,
+            rgba(124, 58, 237, 0.06),
+            transparent 8%
+          ),
+          radial-gradient(
+            800px 500px at 90% 90%,
+            rgba(6, 182, 212, 0.05),
+            transparent 10%
+          ),
+          linear-gradient(120deg, var(--bg1) 0%, var(--bg2) 100%);
+        overflow-x: hidden;
+      }
+      /* slow color shift */
+      @keyframes subtleShift {
+        0% {
+          filter: hue-rotate(0deg) saturate(1);
+        }
+        50% {
+          filter: hue-rotate(15deg) saturate(1.05);
+        }
+        100% {
+          filter: hue-rotate(0deg) saturate(1);
+        }
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(
+          45deg,
+          rgba(124, 58, 237, 0.06),
+          rgba(6, 182, 212, 0.06)
+        );
+        mix-blend-mode: overlay;
+        pointer-events: none;
+        animation: subtleShift 18s ease-in-out infinite;
+      }
+
+      /* --- Glass cards --- */
       .glass {
-        background: rgba(255 255 255 / 0.1);
-        backdrop-filter: blur(10px);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(8px);
         border-radius: 12px;
-        border: 1px solid rgba(255 255 255 / 0.3);
-        box-shadow: 0 0 10px rgba(255 255 255 / 0.15);
-        transition: box-shadow 0.3s ease;
+        box-shadow: 0 6px 24px rgba(2, 6, 23, 0.5);
       }
-      .glass:hover {
-        box-shadow: 0 0 20px rgba(255 255 255 / 0.3);
+      /* subtle lift on hover */
+      .lift:hover {
+        transform: translateY(-6px);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
       }
-      /* Glow button */
+
+      /* --- Typography accents --- */
+      .brand-gradient {
+        background: linear-gradient(90deg, #f59e0b, #ec4899 50%, #ef4444);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* --- Buttons --- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.65rem 1rem;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: transform 0.14s ease, box-shadow 0.14s ease;
+      }
+      .btn-primary {
+        background: linear-gradient(90deg, var(--accent1), var(--accent2));
+        color: #021026;
+        box-shadow: 0 6px 22px rgba(124, 58, 237, 0.16);
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(6, 182, 212, 0.16);
+      }
+
+      /* glowing small */
       .glow-button {
-        box-shadow: 0 0 8px #3b82f6;
-        transition: box-shadow 0.3s ease;
+        box-shadow: 0 0 10px rgba(124, 58, 237, 0.12);
       }
-      .glow-button:hover {
-        box-shadow: 0 0 16px #3b82f6;
+
+      /* --- Navbar --- */
+      nav {
+        backdrop-filter: blur(6px);
       }
-      /* Reviews carousel */
+      .nav-link {
+        color: rgba(255, 255, 255, 0.9);
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.5rem;
+        transition: background 0.18s ease, color 0.18s ease;
+      }
+      .nav-link.active {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.03);
+      }
+
+      /* --- Section spacing --- */
+      section {
+        padding: 4.25rem 1.25rem;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* --- Hero --- */
+      .hero-cta {
+        transform: translateY(0);
+        transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.2, 1);
+      }
+      .hero-float {
+        animation: float 4s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* --- Carousel --- */
       .carousel {
-        overflow: hidden;
         position: relative;
+        overflow: hidden;
       }
       .carousel-track {
         display: flex;
-        transition: transform 0.5s ease-in-out;
+        transition: transform 0.6s cubic-bezier(0.22, 0.9, 0.2, 1);
+        will-change: transform;
       }
       .carousel-item {
         min-width: 100%;
         box-sizing: border-box;
         padding: 1rem;
       }
+
+      /* --- small UI touches --- */
+      .pill {
+        background: rgba(255, 255, 255, 0.04);
+        padding: 0.3rem 0.6rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.875rem;
+      }
+
+      /* --- Fade / slide on reveal --- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: all 0.9s cubic-bezier(0.2, 0.9, 0.2, 1);
+      }
+      .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- responsive tweaks --- */
+      @media (min-width: 768px) {
+        .hero-grid {
+          display: grid;
+          grid-template-columns: 1fr 420px;
+          gap: 2.25rem;
+          align-items: center;
+        }
+      }
+
+      /* contact map card fixed height */
+      .map-card iframe {
+        min-height: 240px;
+        width: 100%;
+        border: 0;
+        display: block;
+        border-radius: 8px;
+      }
+
+      /* accessible focus states */
+      a:focus,
+      button:focus,
+      input:focus,
+      select:focus {
+        outline: 3px solid rgba(99, 102, 241, 0.14);
+        outline-offset: 3px;
+      }
+
+      /* small blog preview */
+      .blog-card img {
+        border-radius: 8px;
+        object-fit: cover;
+        width: 100%;
+        height: 160px;
+      }
+
+      /* footer */
+      footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        background: linear-gradient(
+          0deg,
+          rgba(2, 6, 23, 0.6),
+          rgba(2, 6, 23, 0.6)
+        );
+      }
     </style>
   </head>
-  <body
-    class="bg-gradient-to-r from-blue-900 via-purple-900 to-black text-white font-sans"
-  >
-    <!-- Navbar -->
-    <nav
-      class="bg-black bg-opacity-70 fixed w-full z-50 backdrop-blur-md shadow-md"
-    >
-      <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16"
-      >
-        <div class="text-2xl font-bold select-none">
-          <img class="w-20 h-25" src="image/mainlogo.png" alt="" />
-        </div>
-        <!-- Put your logo here -->
-        <button
-          id="menu-toggle"
-          class="md:hidden focus:outline-none text-white"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-7 w-7"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
+  <body class="text-white">
+    <!-- STICKY NAV -->
+    <nav class="fixed w-full top-0 z-50">
+      <div class="bg-black bg-opacity-50 backdrop-blur-md">
+        <div class="container flex items-center justify-between px-4 py-3">
+          <div class="flex items-center gap-3">
+            <img
+              src="image/mainlogo.png"
+              alt="logo"
+              class="w-14 h-14 rounded-md object-cover"
             />
-          </svg>
-        </button>
-        <ul
-          id="nav-menu"
-          class="hidden md:flex space-x-8 items-center text-white"
-        >
-          <li>
-            <a href="#about" class="hover:text-yellow-400 transition">About</a>
-          </li>
-          <li>
-            <a href="#courses" class="hover:text-yellow-400 transition"
-              >Courses</a
-            >
-          </li>
-          <li>
-            <a href="#schedule" class="hover:text-yellow-400 transition"
-              >Schedule</a
-            >
-          </li>
-          <li>
-            <a href="#reviews" class="hover:text-yellow-400 transition"
-              >Reviews</a
-            >
-          </li>
-          <li>
-            <a href="#gallery" class="hover:text-yellow-400 transition"
-              >Gallery</a
-            >
-          </li>
-          <li>
-            <a href="#contact" class="hover:text-yellow-400 transition"
-              >Contact</a
-            >
-          </li>
-          <li>
-            <a href="#register" class="hover:text-yellow-400 transition"
-              >Register</a
-            >
-          </li>
-          <li>
+            <div>
+              <div class="text-lg font-bold select-none">
+                Top Scorers'
+                <span class="text-sm font-semibold block"
+                  >IELTS & Speaking Academy</span
+                >
+              </div>
+              <div class="text-xs text-gray-300">Dhaka, Bangladesh</div>
+            </div>
+          </div>
+
+          <div class="hidden md:flex items-center gap-3">
+            <a class="nav-link" href="#home">Home</a>
+            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="#courses">Courses</a>
+            <a class="nav-link" href="#instructors">Instructors</a>
+            <a class="nav-link" href="#blog">Blog</a>
+            <a class="nav-link" href="#contact">Contact</a>
+            <a class="nav-link" href="#register">Register</a>
+          </div>
+
+          <!-- mobile menu btn -->
+          <div class="md:hidden">
             <button
-              id="lang-toggle"
-              class="bg-green-500 text-black px-3 py-1 rounded font-semibold hover:bg-green-400 transition"
+              id="menu-toggle"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+              class="p-2 rounded-md bg-white text-black bg-opacity-6"
             >
-              বাংলা
+              <i class="fa fa-bars"></i>
             </button>
-          </li>
-        </ul>
+          </div>
+        </div>
+        <!-- mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-4 pb-4">
+          <div class="flex flex-col gap-2">
+            <a class="nav-link" href="#home">Home</a>
+            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="#courses">Courses</a>
+            <a class="nav-link" href="#instructors">Instructors</a>
+            <a class="nav-link" href="#blog">Blog</a>
+            <a class="nav-link" href="#contact">Contact</a>
+            <a class="nav-link" href="#register">Register</a>
+          </div>
+        </div>
       </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div
-      id="mobile-menu"
-      class="md:hidden bg-black bg-opacity-90 backdrop-blur-md px-4 py-4 space-y-4 hidden text-center text-white fixed w-full top-16 z-40"
-    >
-      <a href="#about" class="block py-2 hover:text-yellow-400">About</a>
-      <a href="#courses" class="block py-2 hover:text-yellow-400">Courses</a>
-      <a href="#schedule" class="block py-2 hover:text-yellow-400">Schedule</a>
-      <a href="#reviews" class="block py-2 hover:text-yellow-400">Reviews</a>
-      <a href="#gallery" class="block py-2 hover:text-yellow-400">Gallery</a>
-      <a href="#contact" class="block py-2 hover:text-yellow-400">Contact</a>
-      <a href="#register" class="block py-2 hover:text-yellow-400">Register</a>
-      <button
-        id="mobile-lang-toggle"
-        class="bg-green-500 text-black px-3 py-1 rounded font-semibold hover:bg-green-400 transition w-full"
-      >
-        বাংলা
-      </button>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="pt-24 text-center py-20 px-6">
-      <h1
-        class="text-5xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 animate-pulse"
-        data-lang-en
-      >
-        Top Scorers' IELTS & Speaking Academy
-      </h1>
-      <h1
-        class="hidden text-5xl md:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-pink-500 to-red-500 animate-pulse"
-        data-lang-bn
-      >
-        টপ স্কোরার্স IELTS ও স্পিকিং একাডেমি
-      </h1>
-      <p class="mt-6 text-xl max-w-3xl mx-auto" data-lang-en>
-        Achieve your dream band with expert mentors and personalized strategies
-      </p>
-      <p class="hidden mt-6 text-xl max-w-3xl mx-auto" data-lang-bn>
-        দক্ষ শিক্ষকদের সঙ্গে আপনার স্বপ্নের ব্যান্ড স্কোর অর্জন করুন
-      </p>
-      <a
-        href="#register"
-        class="mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg glow-button transition"
-        data-lang-en
-        >Register Now</a
-      >
-      <a
-        href="#register"
-        class="hidden mt-8 inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg glow-button transition"
-        data-lang-bn
-        >রেজিস্টার করুন</a
-      >
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="max-w-5xl mx-auto px-6 py-16">
-      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
-        Meet Our Teachers
-      </h2>
-      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
-        আমাদের শিক্ষকবৃন্দ
-      </h2>
-      <div class="grid md:grid-cols-2 gap-10">
-        <div
-          class="glass p-6 shadow-lg hover:shadow-xl transition cursor-default rounded-lg text-center"
-        >
-          <h3 class="text-2xl font-semibold mb-2">Afnan Sohel</h3>
-          <p class="text-yellow-300 font-semibold" data-lang-en>
-            IELTS Band Score: 8.5
-          </p>
-          <p class="hidden text-yellow-300 font-semibold" data-lang-bn>
-            IELTS ব্যান্ড স্কোর: ৮.৫
-          </p>
-        </div>
-        <div
-          class="glass p-6 shadow-lg hover:shadow-xl transition cursor-default rounded-lg text-center"
-        >
-          <h3 class="text-2xl font-semibold mb-2">Sayeed Islam</h3>
-          <p class="text-yellow-300 font-semibold" data-lang-en>
-            IELTS Band Score: 6.5
-          </p>
-          <p class="hidden text-yellow-300 font-semibold" data-lang-bn>
-            IELTS ব্যান্ড স্কোর: ৬.৫
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Courses Section -->
-    <section id="courses" class="max-w-5xl mx-auto px-6 py-16">
-      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
-        Our Courses & Pricing
-      </h2>
-      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
-        আমাদের কোর্স ও মূল্য
-      </h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div
-          class="glass p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center"
-        >
-          <h3 class="text-xl font-semibold mb-2" data-lang-en>
-            Basic Speaking
-          </h3>
-          <h3 class="hidden text-xl font-semibold mb-2" data-lang-bn>
-            বেসিক স্পিকিং
-          </h3>
-          <p class="mb-4" data-lang-en>Duration: 1 Month</p>
-          <p class="hidden mb-4" data-lang-bn>সময়কাল: ১ মাস</p>
-          <p class="text-yellow-400 font-bold text-2xl">৳3,000</p>
-        </div>
-        <div
-          class="glass p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center"
-        >
-          <h3 class="text-xl font-semibold mb-2" data-lang-en>IELTS Crash</h3>
-          <h3 class="hidden text-xl font-semibold mb-2" data-lang-bn>
-            আইইএলটিএস ক্র্যাশ
-          </h3>
-          <p class="mb-4" data-lang-en>Duration: 1.5 Months</p>
-          <p class="hidden mb-4" data-lang-bn>সময়কাল: ১.৫ মাস</p>
-          <p class="text-yellow-400 font-bold text-2xl">৳6,500</p>
-        </div>
-        <div
-          class="glass p-6 rounded-lg shadow-lg hover:shadow-xl transition text-center"
-        >
-          <h3 class="text-xl font-semibold mb-2" data-lang-en>
-            Full IELTS Package
-          </h3>
-          <h3 class="hidden text-xl font-semibold mb-2" data-lang-bn>
-            ফুল আইইএলটিএস প্যাকেজ
-          </h3>
-          <p class="mb-4" data-lang-en>Duration: 3 Months</p>
-          <p class="hidden mb-4" data-lang-bn>সময়কাল: ৩ মাস</p>
-          <p class="text-yellow-400 font-bold text-2xl">৳12,000</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Schedule Section -->
-    <section id="schedule" class="max-w-5xl mx-auto px-6 py-16">
-      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
-        Class Schedule
-      </h2>
-      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
-        ক্লাস সূচি
-      </h2>
-      <div class="overflow-x-auto">
-        <table
-          class="min-w-full text-center border border-white text-white rounded-lg overflow-hidden"
-        >
-          <thead>
-            <tr class="bg-purple-900">
-              <th class="border px-4 py-2">Day</th>
-              <th class="border px-4 py-2">Time</th>
-              <th class="border px-4 py-2" data-lang-en>Course</th>
-              <th class="border px-4 py-2 hidden" data-lang-bn>কোর্স</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="bg-white bg-opacity-10">
-              <td class="border px-4 py-2">Sunday</td>
-              <td class="border px-4 py-2">4 PM - 6 PM</td>
-              <td class="border px-4 py-2" data-lang-en>Basic Speaking</td>
-              <td class="border px-4 py-2 hidden" data-lang-bn>
-                বেসিক স্পিকিং
-              </td>
-            </tr>
-            <tr class="bg-white bg-opacity-5">
-              <td class="border px-4 py-2">Tuesday</td>
-              <td class="border px-4 py-2">4 PM - 6 PM</td>
-              <td class="border px-4 py-2" data-lang-en>IELTS Crash</td>
-              <td class="border px-4 py-2 hidden" data-lang-bn>
-                আইইএলটিএস ক্র্যাশ
-              </td>
-            </tr>
-            <tr class="bg-white bg-opacity-10">
-              <td class="border px-4 py-2">Friday</td>
-              <td class="border px-4 py-2">10 AM - 12 PM</td>
-              <td class="border px-4 py-2" data-lang-en>Full IELTS</td>
-              <td class="border px-4 py-2 hidden" data-lang-bn>
-                ফুল আইইএলটিএস
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="max-w-4xl mx-auto px-6 py-16">
-      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
-        Student Reviews
-      </h2>
-      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
-        শিক্ষার্থীদের মতামত
-      </h2>
-      <div class="carousel relative">
-        <div
-          class="carousel-track flex transition-transform duration-500"
-          style="transform: translateX(0%)"
-          id="carousel-track"
-        >
-          <div class="carousel-item glass rounded-lg shadow-lg p-6 mx-4">
-            <p class="italic">
-              “Afnan Madam's teaching method helped me achieve an 8.0 band!
-              Highly recommended.”
+    <!-- PAGE CONTENT -->
+    <main class="pt-20">
+      <!-- HOME / HERO -->
+      <section id="home" class="pt-16 pb-8">
+        <div class="container grid gap-6 hero-grid">
+          <div class="reveal" data-reveal>
+            <h1
+              class="text-4xl md:text-5xl font-extrabold leading-tight brand-gradient"
+            >
+              Top Scorers' IELTS & Speaking Academy
+            </h1>
+            <p class="mt-4 text-lg text-gray-200 max-w-xl">
+              Achieve your dream band with expert mentors, targeted practice and
+              personalised strategies. Small classes, proven methods, real
+              results.
             </p>
-            <p class="mt-4 font-semibold">— Rahim, Dhaka</p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a
+                href="#register"
+                class="btn btn-primary btn-lg glow-button hero-cta"
+              >
+                <i class="fa fa-user-graduate"></i> Register Now</a
+              >
+              <a
+                href="#courses"
+                class="btn bg-white bg-opacity-6 text-black px-4 py-2 rounded-full"
+                >View Courses</a
+              >
+            </div>
+
+            <div class="mt-8 grid grid-cols-3 gap-3 max-w-sm text-sm">
+              <div class="glass p-3 text-center">
+                <div class="text-2xl font-bold">+250</div>
+                <div class="text-gray-300 text-xs">Students coached</div>
+              </div>
+              <div class="glass p-3 text-center">
+                <div class="text-2xl font-bold">8.0</div>
+                <div class="text-gray-300 text-xs">Top band achieved</div>
+              </div>
+              <div class="glass p-3 text-center">
+                <div class="text-2xl font-bold">95%</div>
+                <div class="text-gray-300 text-xs">Satisfaction</div>
+              </div>
+            </div>
           </div>
 
-          <div class="carousel-item glass rounded-lg shadow-lg p-6 mx-4">
-            <p class="italic">
-              “The speaking classes with Sayeed Sir improved my confidence
-              dramatically.”
-            </p>
-            <p class="mt-4 font-semibold">— Shathi, Chattogram</p>
-          </div>
-
-          <div class="carousel-item glass rounded-lg shadow-lg p-6 mx-4">
-            <p class="italic">
-              “Great environment and excellent support from the whole team.”
-            </p>
-            <p class="mt-4 font-semibold">— Jamil, Sylhet</p>
+          <div class="reveal glass p-6 hero-float lift" data-reveal>
+            <div class="text-sm text-gray-300">Why choose us</div>
+            <h3 class="text-2xl font-semibold mt-2">
+              Personal mentoring • Small batches • Real exam practice
+            </h3>
+            <ul class="mt-4 space-y-2 text-gray-200 text-sm">
+              <li class="flex items-start gap-3">
+                <span class="pill">✔</span> Targeted speaking drills
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="pill">✔</span> Mock tests & feedback
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="pill">✔</span> Strategy for each band
+              </li>
+            </ul>
+            <div class="mt-5 flex gap-2">
+              <a class="btn btn-primary" href="#contact"
+                ><i class="fa fa-phone"></i> Contact</a
+              >
+              <a class="btn bg-white text-black bg-opacity-6" href="#gallery"
+                >Gallery</a
+              >
+            </div>
           </div>
         </div>
-        <button
-          id="prevBtn"
-          class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black rounded-full p-2 hover:bg-yellow-300 shadow-lg transition"
-        >
-          &lt;
-        </button>
-        <button
-          id="nextBtn"
-          class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-yellow-400 text-black rounded-full p-2 hover:bg-yellow-300 shadow-lg transition"
-        >
-          &gt;
-        </button>
-      </div>
-    </section>
+      </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="max-w-6xl mx-auto px-6 py-16">
-      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>Gallery</h2>
-      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
-        গ্যালারি
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        <video
-          controls
-          src="Files/video1.mp4"
-          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
-        ></video>
-        <video
-          controls
-          src="Files/video2.mp4"
-          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
-        ></video>
-        <video
-          controls
-          src="Files/video3.mp4"
-          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
-        ></video>
-        <img
-          src="image/banner.jpg"
-          alt="Classroom"
-          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
-        />
-        <img
-          src="image/banner.jpg"
-          alt="Classroom"
-          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
-        />
-        <img
-          src="image/gallery1.jpg"
-          alt="Students"
-          class="rounded-lg shadow-lg hover:shadow-xl transition cursor-pointer"
-        />
-      </div>
-    </section>
-
-    <!-- Registration Form Section -->
-    <section id="register" class="max-w-3xl mx-auto px-6 py-16">
-      <h2 class="text-4xl font-bold mb-10 text-center" data-lang-en>
-        Register for a Course
-      </h2>
-      <h2 class="hidden text-4xl font-bold mb-10 text-center" data-lang-bn>
-        কোর্সে রেজিস্ট্রেশন করুন
-      </h2>
-      <form
-        id="registration-form"
-        class="glass p-8 rounded-lg shadow-lg space-y-6 max-w-xl mx-auto"
-        onsubmit="event.preventDefault(); alertSubmission();"
+      <!-- ABOUT -->
+      <section
+        id="about"
+        class="bg-gradient-to-b from-transparent to-[rgba(255,255,255,0.01)]"
       >
-        <input
-          type="text"
-          id="name-en"
-          placeholder="Full Name"
-          required
-          class="w-full p-3 rounded border border-gray-300 text-black"
-          data-lang-en
-        />
-        <input
-          type="text"
-          id="name-bn"
-          placeholder="পূর্ণ নাম"
-          required
-          class="w-full p-3 rounded border border-gray-300 text-black hidden"
-          data-lang-bn
-        />
+        <div class="container">
+          <div class="reveal" data-reveal>
+            <h2 class="text-3xl font-bold">About the Academy</h2>
+            <p class="mt-3 text-gray-300 max-w-3xl">
+              Top Scorers' is built by exam-focused tutors who understand the
+              IELTS test inside out. We combine exam-style practice with
+              fluency-building and confidence training.
+            </p>
+          </div>
 
-        <input
-          type="email"
-          id="email-en"
-          placeholder="Email Address"
-          required
-          class="w-full p-3 rounded border border-gray-300 text-black"
-          data-lang-en
-        />
-        <input
-          type="email"
-          id="email-bn"
-          placeholder="ইমেইল ঠিকানা"
-          required
-          class="w-full p-3 rounded border border-gray-300 text-black hidden"
-          data-lang-bn
-        />
+          <div class="mt-8 grid md:grid-cols-3 gap-6">
+            <div class="glass p-6 reveal" data-reveal>
+              <h3 class="font-semibold text-xl">Mission</h3>
+              <p class="mt-2 text-gray-300">
+                Empower learners with skills and confidence to hit their target
+                band and succeed globally.
+              </p>
+            </div>
+            <div class="glass p-6 reveal" data-reveal>
+              <h3 class="font-semibold text-xl">Vision</h3>
+              <p class="mt-2 text-gray-300">
+                Be the most trusted local IELTS academy known for measurable
+                results.
+              </p>
+            </div>
+            <div class="glass p-6 reveal" data-reveal>
+              <h3 class="font-semibold text-xl">Our Approach</h3>
+              <p class="mt-2 text-gray-300">
+                Personalized study plans, continuous feedback and small class
+                sizes for focused progress.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <input
-          type="tel"
-          id="phone-en"
-          placeholder="Phone Number"
-          required
-          class="w-full p-3 rounded border border-gray-300 text-black"
-          data-lang-en
-        />
-        <input
-          type="tel"
-          id="phone-bn"
-          placeholder="ফোন নম্বর"
-          required
-          class="w-full p-3 rounded border border-gray-300 text-black hidden"
-          data-lang-bn
-        />
+      <!-- COURSES -->
+      <section id="courses">
+        <div class="container">
+          <div class="flex items-center justify-between">
+            <h2 class="text-3xl font-bold reveal" data-reveal>
+              Courses & Pricing
+            </h2>
+            <div class="text-sm text-gray-300 reveal" data-reveal>
+              Flexible schedules • Online/Offline • Batch discounts
+            </div>
+          </div>
 
-        <select
-          id="course-en"
-          required
-          class="w-full p-3 rounded border border-gray-300 text-black"
-          data-lang-en
-        >
-          <option value="" disabled selected>Select Course</option>
-          <option value="Basic Speaking">Basic Speaking</option>
-          <option value="IELTS Crash">IELTS Crash</option>
-          <option value="Full IELTS Package">Full IELTS Package</option>
-        </select>
-        <select
-          id="course-bn"
-          required
-          class="w-full p-3 rounded border border-gray-300 text-black hidden"
-          data-lang-bn
-        >
-          <option value="" disabled selected>কোর্স নির্বাচন করুন</option>
-          <option value="Basic Speaking">বেসিক স্পিকিং</option>
-          <option value="IELTS Crash">আইইএলটিএস ক্র্যাশ</option>
-          <option value="Full IELTS Package">ফুল আইইএলটিএস প্যাকেজ</option>
-        </select>
+          <div class="mt-6 grid md:grid-cols-3 gap-6">
+            <div class="glass p-6 lift reveal" data-reveal>
+              <h3 class="text-xl font-semibold">Basic Speaking</h3>
+              <p class="mt-2 text-gray-300">
+                Duration: 1 Month — Focus: Pronunciation, fluency & everyday
+                speaking.
+              </p>
+              <div class="mt-4 text-yellow-300 font-bold text-2xl">৳3,000</div>
+              <div class="mt-4 flex gap-2">
+                <button class="btn btn-primary">Enroll</button>
+                <button class="btn bg-white text-black bg-opacity-6">
+                  Details
+                </button>
+              </div>
+            </div>
 
-        <button
-          type="submit"
-          class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded glow-button transition"
-          data-lang-en
-        >
-          Submit
-        </button>
-        <button
-          type="submit"
-          class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded glow-button transition hidden"
-          data-lang-bn
-        >
-          জমা দিন
-        </button>
-      </form>
-    </section>
+            <div class="glass p-6 lift reveal" data-reveal>
+              <h3 class="text-xl font-semibold">IELTS Crash</h3>
+              <p class="mt-2 text-gray-300">
+                Duration: 1.5 Months — Focus: Exam strategy, timed practice.
+              </p>
+              <div class="mt-4 text-yellow-300 font-bold text-2xl">৳6,500</div>
+              <div class="mt-4 flex gap-2">
+                <button class="btn btn-primary">Enroll</button>
+                <button class="btn bg-white text-black bg-opacity-6">
+                  Details
+                </button>
+              </div>
+            </div>
 
-    <!-- Contact Section -->
-    <section
-      id="contact"
-      class="max-w-5xl mx-auto px-6 py-16 text-center space-y-4"
-    >
-      <h2 class="text-4xl font-bold mb-10" data-lang-en>Contact Us</h2>
-      <h2 class="hidden text-4xl font-bold mb-10" data-lang-bn>যোগাযোগ করুন</h2>
-      <p>
-        <i class="fa-solid fa-location-dot"></i> 54-58, Zila parisad market
-        (old), Nawabganj., Dhaka, Bangladesh
-      </p>
-      <p>
-        <i class="fa-solid fa-envelope"></i>
-        <a
-          href="mailto:topscorersieltsacademy@gmail.com"
-          class="no-underline hover:text-yellow-400"
-        >
-          topscorersieltsacademy@gmail.com</a
-        >
-      </p>
-      <p>
-        <i class="fa-brands fa-whatsapp"></i>
-        <a
-          href="https://wa.me/+88001732066129"
-          target="_blank"
-          class="text-green-400 no-underline hover:text-green-600 font-semibold"
-          >WhatsApp</a
-        >
-      </p>
-      <p>
-        <i class="fa-brands fa-facebook"></i>
-        <a
-          href="https://www.facebook.com/share/16f2MjDQy5/?mibextid=wwXIfr"
-          target="_blank"
-          class="text-blue-400 hover:text-blue-600 font-semibold"
-          >Facebook Page</a
-        >
-      </p>
-      <div class="mt-8 rounded-lg overflow-hidden shadow-lg">
-        <iframe
-          src="https://www.google.com/maps?q=54-58,+Zila+parisad+market+(old),+Nawabganj.,+Dhaka,+Bangladesh&output=embed"
-          width="100%"
-          height="300"
-          style="border: 0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
+            <div class="glass p-6 lift reveal" data-reveal>
+              <h3 class="text-xl font-semibold">Full IELTS Package</h3>
+              <p class="mt-2 text-gray-300">
+                Duration: 3 Months — Full coverage with mocks & 1:1 guidance.
+              </p>
+              <div class="mt-4 text-yellow-300 font-bold text-2xl">৳12,000</div>
+              <div class="mt-4 flex gap-2">
+                <button class="btn btn-primary">Enroll</button>
+                <button class="btn bg-white text-black bg-opacity-6">
+                  Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INSTRUCTORS -->
+      <section id="instructors">
+        <div class="container">
+          <div class="flex items-center justify-between">
+            <h2 class="text-3xl font-bold reveal" data-reveal>
+              Our Instructors
+            </h2>
+            <div class="text-sm text-gray-300 reveal" data-reveal>
+              Experienced, patient & result-driven
+            </div>
+          </div>
+
+          <div class="mt-6 grid md:grid-cols-2 gap-6">
+            <div class="glass p-6 reveal" data-reveal>
+              <div class="flex items-center gap-4">
+                <img
+                  src="image/teacher1.jpg"
+                  alt="Afnan Sohel"
+                  class="w-24 h-24 rounded-md object-cover"
+                />
+                <div>
+                  <h3 class="text-xl font-semibold">Afnan Sohel</h3>
+                  <div class="text-yellow-300 font-medium">
+                    IELTS Band Score: 8.5
+                  </div>
+                  <p class="mt-2 text-gray-300">
+                    Specialist in speaking and exam strategy with personalised
+                    feedback approach.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass p-6 reveal" data-reveal>
+              <div class="flex items-center gap-4">
+                <img
+                  src="image/teacher2.jpg"
+                  alt="Sayeed Islam"
+                  class="w-24 h-24 rounded-md object-cover"
+                />
+                <div>
+                  <h3 class="text-xl font-semibold">Sayeed Islam</h3>
+                  <div class="text-yellow-300 font-medium">
+                    IELTS Band Score: 6.5
+                  </div>
+                  <p class="mt-2 text-gray-300">
+                    Strong at boosting confidence and practical speaking skills
+                    for real-life tests.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- REVIEWS / CAROUSEL -->
+      <section id="reviews">
+        <div class="container">
+          <h2 class="text-3xl font-bold reveal" data-reveal>Student Reviews</h2>
+
+          <div class="mt-6 carousel glass p-4 reveal" data-reveal>
+            <div class="carousel-track" id="carousel-track">
+              <div class="carousel-item">
+                <blockquote class="italic text-gray-200">
+                  “Afnan Madam's teaching method helped me achieve an 8.0 band!
+                  Highly recommended.”
+                </blockquote>
+                <p class="mt-3 font-semibold">— Rahim, Dhaka</p>
+              </div>
+              <div class="carousel-item">
+                <blockquote class="italic text-gray-200">
+                  “The speaking classes with Sayeed Sir improved my confidence
+                  dramatically.”
+                </blockquote>
+                <p class="mt-3 font-semibold">— Shathi, Chattogram</p>
+              </div>
+              <div class="carousel-item">
+                <blockquote class="italic text-gray-200">
+                  “Great environment and excellent support from the whole team.”
+                </blockquote>
+                <p class="mt-3 font-semibold">— Jamil, Sylhet</p>
+              </div>
+            </div>
+
+            <div class="mt-4 flex justify-between items-center">
+              <div class="flex gap-3">
+                <button
+                  id="prevBtn"
+                  class="p-2 rounded-full bg-yellow-400 text-black"
+                >
+                  <i class="fa fa-chevron-left"></i>
+                </button>
+                <button
+                  id="nextBtn"
+                  class="p-2 rounded-full bg-yellow-400 text-black"
+                >
+                  <i class="fa fa-chevron-right"></i>
+                </button>
+              </div>
+              <div class="text-sm text-gray-300">
+                Trusted by learners across Bangladesh
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY -->
+      <section
+        id="gallery"
+        class="bg-gradient-to-b from-transparent to-[rgba(255,255,255,0.01)]"
+      >
+        <div class="container">
+          <h2 class="text-3xl font-bold reveal" data-reveal>Gallery</h2>
+          <div
+            class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+          >
+            <div class="glass p-2 reveal" data-reveal>
+              <img
+                src="image/banner.jpg"
+                alt="Classroom"
+                class="rounded-md w-full h-44 object-cover"
+              />
+            </div>
+            <div class="glass p-2 reveal" data-reveal>
+              <video
+                src="Files/video1.mp4"
+                controls
+                class="rounded-md w-full h-44 object-cover"
+              ></video>
+            </div>
+            <div class="glass p-2 reveal" data-reveal>
+              <img
+                src="image/gallery1.jpg"
+                alt="Students"
+                class="rounded-md w-full h-44 object-cover"
+              />
+            </div>
+            <div class="glass p-2 reveal" data-reveal>
+              <video
+                src="Files/video2.mp4"
+                controls
+                class="rounded-md w-full h-44 object-cover"
+              ></video>
+            </div>
+            <div class="glass p-2 reveal" data-reveal>
+              <video
+                src="Files/video3.mp4"
+                controls
+                class="rounded-md w-full h-44 object-cover"
+              ></video>
+            </div>
+            <div class="glass p-2 reveal" data-reveal>
+              <img
+                src="image/banner.jpg"
+                alt="Classroom 2"
+                class="rounded-md w-full h-44 object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOG -->
+      <section id="blog">
+        <div class="container">
+          <div class="flex items-center justify-between">
+            <h2 class="text-3xl font-bold reveal" data-reveal>Blog & Tips</h2>
+            <a href="#blog" class="text-sm text-gray-300 reveal" data-reveal
+              >View all</a
+            >
+          </div>
+
+          <div class="mt-6 grid md:grid-cols-3 gap-6">
+            <article class="glass p-4 reveal" data-reveal>
+              <img src="image/blog1.jpg" alt="tips" class="blog-card" />
+              <h3 class="mt-3 font-semibold">
+                5 Speaking Tips to Improve Quickly
+              </h3>
+              <p class="mt-2 text-gray-300 text-sm">
+                Short, practical activities to boost the fluency in 2 weeks.
+              </p>
+              <a class="mt-3 inline-block text-sm text-yellow-300" href="#"
+                >Read more →</a
+              >
+            </article>
+
+            <article class="glass p-4 reveal" data-reveal>
+              <img src="image/blog2.jpg" alt="tips" class="blog-card" />
+              <h3 class="mt-3 font-semibold">
+                How to handle the speaking test nerves
+              </h3>
+              <p class="mt-2 text-gray-300 text-sm">
+                Breathing and mindset exercises used by our students.
+              </p>
+              <a class="mt-3 inline-block text-sm text-yellow-300" href="#"
+                >Read more →</a
+              >
+            </article>
+
+            <article class="glass p-4 reveal" data-reveal>
+              <img src="image/blog3.jpg" alt="tips" class="blog-card" />
+              <h3 class="mt-3 font-semibold">Mock test checklist</h3>
+              <p class="mt-2 text-gray-300 text-sm">
+                What to do before and after your mock tests for max progress.
+              </p>
+              <a class="mt-3 inline-block text-sm text-yellow-300" href="#"
+                >Read more →</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="container grid md:grid-cols-2 gap-6">
+          <div class="reveal" data-reveal>
+            <h2 class="text-3xl font-bold">Contact Us</h2>
+            <p class="mt-2 text-gray-300">
+              Visit us or send a message — we reply fast.
+            </p>
+
+            <div class="mt-4 glass p-4">
+              <p>
+                <i class="fa-solid fa-location-dot"></i> 54-58, Zila parisad
+                market (old), Nawabganj., Dhaka, Bangladesh
+              </p>
+              <p class="mt-2">
+                <i class="fa-solid fa-envelope"></i>
+                <a
+                  class="text-yellow-300"
+                  href="mailto:topscorersieltsacademy@gmail.com"
+                  >topscorersieltsacademy@gmail.com</a
+                >
+              </p>
+              <p class="mt-2">
+                <i class="fa-brands fa-whatsapp"></i>
+                <a
+                  class="text-green-300"
+                  href="https://wa.me/+88001732066129"
+                  target="_blank"
+                  >WhatsApp</a
+                >
+              </p>
+              <p class="mt-2">
+                <i class="fa-brands fa-facebook"></i>
+                <a
+                  class="text-blue-300"
+                  href="https://www.facebook.com/share/16f2MjDQy5/?mibextid=wwXIfr"
+                  target="_blank"
+                  >Facebook Page</a
+                >
+              </p>
+            </div>
+
+            <div class="mt-6">
+              <h3 class="font-semibold">Our location</h3>
+              <div class="mt-3 map-card glass p-3">
+                <iframe
+                  src="https://www.google.com/maps?q=54-58,+Zila+parisad+market+(old),+Nawabganj.,+Dhaka,+Bangladesh&output=embed"
+                  loading="lazy"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal" data-reveal>
+            <h3 class="text-xl font-semibold">Send us a message</h3>
+
+            <form
+              id="contact-form"
+              class="mt-4 space-y-3 glass p-4"
+              onsubmit="event.preventDefault(); handleContactSubmit();"
+            >
+              <div>
+                <label class="text-sm text-gray-300">Full name</label>
+                <input
+                  id="c_name"
+                  required
+                  class="w-full mt-1 p-3 rounded bg-transparent border border-white bg-opacity-6"
+                  placeholder="Your full name"
+                />
+              </div>
+              <div>
+                <label class="text-sm text-gray-300">Email</label>
+                <input
+                  id="c_email"
+                  type="email"
+                  required
+                  class="w-full mt-1 p-3 rounded bg-transparent border border-white bg-opacity-6"
+                  placeholder="you@example.com"
+                />
+              </div>
+              <div>
+                <label class="text-sm text-gray-300">Message</label>
+                <textarea
+                  id="c_message"
+                  rows="4"
+                  required
+                  class="w-full mt-1 p-3 rounded bg-transparent border border-white bg-opacity-6"
+                  placeholder="How can we help?"
+                ></textarea>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <button type="submit" class="btn btn-primary">
+                  Send Message
+                </button>
+                <button
+                  type="button"
+                  class="btn bg-white bg-opacity-6"
+                  onclick="document.getElementById('contact-form').reset();"
+                >
+                  Reset
+                </button>
+              </div>
+              <div id="contact-alert" class="text-sm text-green-300 hidden">
+                Thanks — we will contact you soon.
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- REGISTER -->
+      <section
+        id="register"
+        class="bg-gradient-to-b from-transparent to-[rgba(255,255,255,0.01)]"
+      >
+        <div class="container max-w-xl">
+          <h2 class="text-3xl font-bold reveal" data-reveal>
+            Register for a Course
+          </h2>
+          <form
+            id="registration-form"
+            class="mt-4 glass p-6 space-y-3"
+            onsubmit="event.preventDefault(); handleRegister();"
+          >
+            <div>
+              <label class="text-sm text-gray-300">Full Name</label
+              ><input
+                id="r_name"
+                required
+                class="w-full mt-1 p-3 rounded bg-transparent border border-white bg-opacity-6"
+                placeholder="Full Name"
+              />
+            </div>
+            <div>
+              <label class="text-sm text-gray-300">Email</label
+              ><input
+                id="r_email"
+                type="email"
+                required
+                class="w-full mt-1 p-3 rounded bg-transparent border border-white bg-opacity-6"
+                placeholder="Email address"
+              />
+            </div>
+            <div>
+              <label class="text-sm text-gray-300">Phone</label
+              ><input
+                id="r_phone"
+                type="tel"
+                required
+                class="w-full mt-1 p-3 rounded bg-transparent border border-white bg-opacity-6"
+                placeholder="Phone number"
+              />
+            </div>
+            <div>
+              <label class="text-sm text-gray-300">Select course</label>
+              <select
+                id="r_course"
+                required
+                class="w-full mt-1 p-3 rounded bg-transparent border border-white bg-opacity-6"
+              >
+                <option value="">Select Course</option>
+                <option>Basic Speaking</option>
+                <option>IELTS Crash</option>
+                <option>Full IELTS Package</option>
+              </select>
+            </div>
+
+            <div class="flex gap-3">
+              <button class="btn btn-primary" type="submit">
+                Submit Registration
+              </button>
+              <button
+                class="btn bg-white bg-opacity-6"
+                type="button"
+                onclick="document.getElementById('registration-form').reset();"
+              >
+                Clear
+              </button>
+            </div>
+            <div id="register-alert" class="text-sm text-green-300 hidden">
+              Registration submitted. We'll contact you shortly.
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-6 mt-12">
+      <div
+        class="container flex flex-col md:flex-row items-center justify-center gap-4"
+      >
+        <div class="text-sm text-gray-300">
+          &copy; 2025 Top Scorers' IELTS & Speaking Academy
+        </div>
+        <div class="flex items-center gap-3">
+          <a href="https://wa.me/+88001732066129" class="text-green-400"
+            ><i class="fa fa-whatsapp"></i
+          ></a>
+          <a
+            href="mailto:topscorersieltsacademy@gmail.com"
+            class="text-yellow-300"
+            ><i class="fa fa-envelope"></i
+          ></a>
+          <a
+            href="https://www.facebook.com/share/16f2MjDQy5/?mibextid=wwXIfr"
+            class="text-blue-300"
+            ><i class="fa fa-facebook"></i
+          ></a>
+        </div>
       </div>
-    </section>
-
-    <!-- Footer -->
-    <footer
-      class="bg-black bg-opacity-80 text-center py-6 text-gray-400 select-none"
-    >
-      &copy; 2025 Top Scorers' IELTS & Speaking Academy. All rights reserved.
     </footer>
 
-    <!-- WhatsApp Floating Button -->
+    <!-- FLOATING WA BUTTON -->
     <a
       href="https://wa.me/+88001732066129"
       target="_blank"
-      class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg flex items-center justify-center transition"
-      aria-label="WhatsApp Contact"
+      aria-label="WhatsApp"
+      class="fixed right-6 bottom-6 z-50 bg-green-400 p-3 rounded-full shadow-lg"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-7 w-7"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M20.52 3.48a11.07 11.07 0 0 0-15.66 0 11.15 11.15 0 0 0-3.25 7.88c0 2.19.61 4.32 1.75 6.21L2 22l4.62-1.34a10.96 10.96 0 0 0 6.31 2.04h.01a11.1 11.1 0 0 0 7.88-3.25 11.07 11.07 0 0 0 0-15.66zm-4.11 11.73c-.23.63-1.3 1.22-1.86 1.3-.47.07-1.04.1-1.85-.24-1.27-.52-2.08-1.84-2.33-2.11-.25-.26-2.02-2.51-2.02-4.84 0-2.33 1.23-3.47 1.67-3.93.44-.45 1-.57 1.32-.57.3 0 .56 0 .8.02.25.03.37.03.54.02.18-.02.46-.07.7.53.24.6.82 2.07.89 2.22.06.15.1.33.04.54-.06.2-.09.33-.19.53-.1.2-.22.4-.33.54-.11.14-.23.3-.1.57.12.26.54.9 1.16 1.47.81.79 1.42 1.18 1.67 1.31.25.12.39.1.53-.06.14-.15.59-.69.74-.93.15-.24.3-.2.52-.12.23.07 1.44.68 1.69.8.25.12.41.18.47.3.06.12.06.68-.17 1.31z"
-        />
-      </svg>
+      <i class="fa fa-whatsapp text-black"></i>
     </a>
 
-    <!-- Scripts -->
+    <!-- SCRIPTS -->
     <script>
-      // Mobile menu toggle
+      /* --- Mobile menu toggle --- */
       const menuToggle = document.getElementById("menu-toggle");
-      const navMenu = document.getElementById("nav-menu");
       const mobileMenu = document.getElementById("mobile-menu");
-      menuToggle.addEventListener("click", () => {
+      menuToggle?.addEventListener("click", () => {
+        const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+        menuToggle.setAttribute("aria-expanded", !expanded);
         mobileMenu.classList.toggle("hidden");
       });
 
-      // Language toggle
-      const langToggle = document.getElementById("lang-toggle");
-      const mobileLangToggle = document.getElementById("mobile-lang-toggle");
-      function toggleLanguage() {
+      /* --- Simple language toggle (EN / BN) --- */
+      const langBtn = document.getElementById("lang-toggle");
+      const mobileLangBtn = document.getElementById("mobile-lang-toggle");
+      // We'll rely on data-lang attributes approach (existing code used this) — create translations map if needed.
+      function toggleLanguageUI() {
+        // switch text snippets between English and Bangla where data-lang attributes are used.
         document
           .querySelectorAll("[data-lang-en]")
           .forEach((el) => el.classList.toggle("hidden"));
         document
           .querySelectorAll("[data-lang-bn]")
           .forEach((el) => el.classList.toggle("hidden"));
-        if (langToggle.innerText === "বাংলা") {
-          langToggle.innerText = "English";
-          mobileLangToggle.innerText = "English";
-        } else {
-          langToggle.innerText = "বাংলা";
-          mobileLangToggle.innerText = "বাংলা";
-        }
-        mobileMenu.classList.add("hidden");
+        if (langBtn)
+          langBtn.innerText =
+            langBtn.innerText.trim() === "বাংলা" ? "English" : "বাংলা";
+        if (mobileLangBtn)
+          mobileLangBtn.innerText =
+            mobileLangBtn.innerText.trim() === "বাংলা" ? "English" : "বাংলা";
+        // close mobile menu after toggle
+        if (!mobileMenu.classList.contains("hidden"))
+          mobileMenu.classList.add("hidden");
       }
-      langToggle.addEventListener("click", toggleLanguage);
-      mobileLangToggle.addEventListener("click", toggleLanguage);
+      langBtn?.addEventListener("click", toggleLanguageUI);
+      mobileLangBtn?.addEventListener("click", toggleLanguageUI);
 
-      // Reviews Carousel
+      /* --- Reveal on scroll (IntersectionObserver) --- */
+      const reveals = document.querySelectorAll("[data-reveal]");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("show");
+              e.target.classList.remove("reveal"); // allow animation only once
+              revealObserver.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => revealObserver.observe(el));
+      // Also add 'show' class when elements with data-reveal are visible
+      document
+        .querySelectorAll("[data-reveal]")
+        .forEach((el) => el.classList.add("reveal"));
+
+      /* --- Smooth scroll for nav links and highlight active --- */
+      const navLinks = Array.from(document.querySelectorAll("a.nav-link"));
+      function setActiveLink() {
+        const fromTop = window.scrollY + 120;
+        navLinks.forEach((link) => {
+          const href = link.getAttribute("href");
+          if (!href || !href.startsWith("#")) return;
+          const section = document.querySelector(href);
+          if (!section) return;
+          const top = section.offsetTop;
+          const bottom = top + section.offsetHeight;
+          if (fromTop >= top && fromTop < bottom) link.classList.add("active");
+          else link.classList.remove("active");
+        });
+      }
+      window.addEventListener("scroll", setActiveLink);
+      setActiveLink();
+      // Smooth scroll behavior for internal links
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const target = document.querySelector(a.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            // close mobile menu
+            if (!mobileMenu.classList.contains("hidden"))
+              mobileMenu.classList.add("hidden");
+          }
+        });
+      });
+
+      /* --- Reviews carousel (auto-play + prev/next) --- */
       const track = document.getElementById("carousel-track");
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
-      const items = track.children;
-      let index = 0;
+      let carouselIndex = 0;
+      let carouselCount = track ? track.children.length : 0;
 
       function updateCarousel() {
-        track.style.transform = `translateX(-${index * 100}%)`;
+        if (!track) return;
+        track.style.transform = `translateX(-${carouselIndex * 100}%)`;
       }
-      prevBtn.addEventListener("click", () => {
-        index = index === 0 ? items.length - 1 : index - 1;
+      function nextSlide() {
+        carouselIndex = (carouselIndex + 1) % carouselCount;
         updateCarousel();
+      }
+      function prevSlide() {
+        carouselIndex = (carouselIndex - 1 + carouselCount) % carouselCount;
+        updateCarousel();
+      }
+
+      let autoPlay = setInterval(nextSlide, 4500);
+      nextBtn?.addEventListener("click", () => {
+        nextSlide();
+        resetAuto();
       });
-      nextBtn.addEventListener("click", () => {
-        index = index === items.length - 1 ? 0 : index + 1;
-        updateCarousel();
+      prevBtn?.addEventListener("click", () => {
+        prevSlide();
+        resetAuto();
+      });
+      function resetAuto() {
+        clearInterval(autoPlay);
+        autoPlay = setInterval(nextSlide, 4500);
+      }
+
+      // pause on hover
+      const carouselContainer = document.querySelector(".carousel");
+      carouselContainer?.addEventListener("mouseenter", () =>
+        clearInterval(autoPlay)
+      );
+      carouselContainer?.addEventListener("mouseleave", () => {
+        clearInterval(autoPlay);
+        autoPlay = setInterval(nextSlide, 4500);
       });
 
-      // Form submission alert (no backend)
-      function alertSubmission() {
-        if (confirm("Form submitted! We will contact you soon.")) {
-          document.getElementById("registration-form").reset();
+      /* --- Contact & registration handlers (frontend-only) --- */
+      function handleContactSubmit() {
+        const name = document.getElementById("c_name").value.trim();
+        const email = document.getElementById("c_email").value.trim();
+        const msg = document.getElementById("c_message").value.trim();
+        if (!name || !email || !msg) {
+          alert("Please fill all fields");
+          return;
         }
+        // simulate successful send
+        document.getElementById("contact-alert").classList.remove("hidden");
+        setTimeout(
+          () =>
+            document.getElementById("contact-alert").classList.add("hidden"),
+          5000
+        );
+        document.getElementById("contact-form").reset();
       }
+
+      function handleRegister() {
+        const name = document.getElementById("r_name").value.trim();
+        const email = document.getElementById("r_email").value.trim();
+        const phone = document.getElementById("r_phone").value.trim();
+        const course = document.getElementById("r_course").value;
+        if (!name || !email || !phone || !course) {
+          alert("Please fill all fields");
+          return;
+        }
+        document.getElementById("register-alert").classList.remove("hidden");
+        setTimeout(
+          () =>
+            document.getElementById("register-alert").classList.add("hidden"),
+          5000
+        );
+        document.getElementById("registration-form").reset();
+      }
+
+      /* --- small: respect reduced motion preference --- */
+      const prefersReduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+      if (prefersReduced) {
+        document
+          .querySelectorAll("body *")
+          .forEach((el) => (el.style.transition = "none"));
+      }
+
+      /* --- keyboard accessibility: allow Enter on hero CTA --- */
+      document.querySelectorAll(".btn").forEach((b) => {
+        b.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            b.click();
+          }
+        });
+      });
+
+      /* --- initial small tweaks --- */
+      // mark nav links to anchor scroll on load (so active indicates home)
+      setTimeout(() => window.dispatchEvent(new Event("scroll")), 800);
     </script>
   </body>
 </html>
